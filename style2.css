@@ -271,3 +271,29 @@ body {
     color: white;
 
 }
+/* --- OKUNABİLİRLİK GÜNCELLEMESİ (SİYAH METİNLER) --- */
+
+/* 1. Navbar linklerini siyah yap */
+.navbar .nav-link {
+    color: #000000 !important;
+}
+
+/* 2. Hero Section (Giriş) yazısını siyah yap */
+.hero-section h1, .hero-section p {
+    color: #000000 !important;
+}
+
+/* 3. Tüm şeffaf kartların içindeki yazıları siyah yap */
+.card, .info-card, .card-title, .card-text, .card p, .card h5 {
+    color: #000000 !important;
+}
+
+/* 4. Genel başlıkları ve paragrafları siyah yap */
+h1, h2, h3, h4, h5, h6, p, section p, .text-muted {
+    color: #000000 !important;
+}
+
+/* 5. Kartların üzerindeki o beyaz puslu efekti biraz daha belirgin yapalım ki siyah yazı patlasın */
+.card, .info-card {
+    background: rgba(255, 255, 255, 0.3) !important; /* Beyazlığı %30'a çıkardık */
+}
