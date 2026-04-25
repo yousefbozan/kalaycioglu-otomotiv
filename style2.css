@@ -1,311 +1,105 @@
+/* --- ORİJİNAL KURUMSAL TASARIM --- */
+
 html {
-
     scroll-behavior: smooth;
-
-    scroll-padding-top: 90px; /* Navbar'ın içeriği kapatmasını engeller */
-
+    scroll-padding-top: 90px;
 }
 
-
-
-/* Kartlara hover (üzerine gelince) efekti ekleyelim, daha canlı dursun */
-
-.card, .info-card {
-
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f8f9fa; /* Orijinal açık gri arka plan */
+    color: #333; 
 }
 
-
-
-.card:hover, .info-card:hover {
-
-    transform: translateY(-10px);
-
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
-
-}
-
-
-
-    body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
-
-    .bg-dark-blue { background-color: #0a1d37; }
-
-    .text-dark-blue { color: #0a1d37; }
-
-    .btn-orange { background-color: #f39c12; color: white; border-radius: 0; font-weight: bold; }
-
-    .btn-orange:hover { background-color: #e67e22; color: white; }
-
-    .hero-section {
-
-        background: linear-gradient(rgba(10, 29, 55, 0.7), rgba(10, 29, 55, 0.7)), url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80');
-
-        background-size: cover;
-
-        background-position: center;
-
-        height: 500px;
-
-        color: white;
-
-        display: flex;
-
-        align-items: center;
-
-    }
-
-    .info-card { border-bottom: 4px solid #0a1d37; transition: 0.3s; }
-
-    .info-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-
-    .nav-link { font-weight: 600; color: #333 !important; font-size: 0.9rem; }
-
-    .nav-link.active { color: #0d6efd !important; border-bottom: 2px solid #0d6efd; }
-
-
-
-  /* style.css dosyasının en sonuna ekle */
-
-
-
-.navbar-brand img {
-
-    max-height: 60px; /* Logonun maksimum yüksekliği */
-
-    width: auto;      /* Genişliği otomatik ayarlasın */
-
-    display: block;   /* Bloğu kaplasın */
-
-}
-
-
-
-/* Navigasyonun genel yüksekliğini logoya göre sabitlemek için: */
-
+/* Navbar Ayarları */
 .navbar {
-
     min-height: 80px;
-
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
+.nav-link { 
+    font-weight: 600; 
+    color: #333 !important; 
+    font-size: 0.9rem; 
+}
 
+.bg-dark-blue { background-color: #0a1d37; }
+.text-dark-blue { color: #0a1d37; }
 
-/* WHATSAPP BUTON STİLLERİ */
-
-.whatsapp-fixed {
-
-    position: fixed;
-
-    bottom: 20px;
-
-    right: 20px;
-
-    background-color: #25d366;
-
+/* Hero Section (Orijinal Resimli Haline Dönüş) */
+.hero-section {
+    background: linear-gradient(rgba(10, 29, 55, 0.7), rgba(10, 29, 55, 0.7)), 
+                url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
     color: white;
-
-    padding: 12px 20px;
-
-    border-radius: 50px;
-
     display: flex;
-
     align-items: center;
-
-    text-decoration: none;
-
-    z-index: 9999;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-
-    transition: 0.3s;
-
 }
 
-
-
-.whatsapp-fixed i {
-
-    font-size: 24px;
-
-    margin-right: 10px;
-
-}
-
-
-
-.whatsapp-fixed span {
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-}
-
-
-
-.whatsapp-fixed:hover {
-
-    transform: scale(1.1);
-
-    color: white;
-
-    background-color: #128c7e;
-
-}
-
-
-
-/* Kartlar ve Görseller İçin Küçük Bir Parlatma Efekti */
-
-.info-card, .card {
-
-    transition: all 0.3s ease;
-
-}
-
-
-
-.info-card:hover, .card:hover {
-
-    transform: translateY(-5px);
-
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
-
-}
-
-
-
-/* Video Arka Plan Stilleri */
-
-.video-background {
-
-    position: fixed;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    z-index: -1; /* En arkaya gönder */
-
-    overflow: hidden;
-
-}
-
-
-
-.video-background video {
-
-    min-width: 100%;
-
-    min-height: 100%;
-
-    width: auto;
-
-    height: auto;
-
-    position: absolute;
-
-    top: 50%;
-
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    object-fit: cover;
-
-}
-
-
-
-/* Videonun üzerine siyah transparan bir perde çekiyoruz */
-
-.overlay {
-
-    position: absolute;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background: rgba(0, 0, 0, 0.6); /* %60 karanlık yapıyoruz ki yazılar patlasın */
-
-    z-index: 1;
-
-}
-
-
-
-/* Sayfadaki diğer tüm içerikleri videonun önüne çekmek için */
-
-body {
-
-    color: white; /* Yazıları beyaz yapalım ki karanlıkta parlasın */
-
-    background-color: black; /* Video yüklenene kadar ekran siyah kalsın */
-
-}
-
-
-
-/* Kartların arkasını hafif transparan yaparsan çok daha lüks durur */
-
-.card {
-
-    background: rgba(255, 255, 255, 0.05) !important;
-
-    backdrop-filter: blur(10px); /* Cam efekti (Frosted Glass) */
-
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    color: white;
-
-}
-/* --- HERO SECTION VE GENEL OKUNABİLİRLİK DÜZENLEMESİ --- */
-
-/* 1. Hero üzerindeki o koyu kutuyu açık renkli ve buzlu yapalım */
 .hero-section .rounded {
-    background: rgba(255, 255, 255, 0.4) !important; /* Beyaz transparan arka plan */
-    backdrop-filter: blur(15px); /* Buzlu cam efekti */
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    padding: 40px !important;
-}
-
-/* 2. Hero içindeki başlık ve alt yazıyı net siyah yapalım */
-.hero-section h1 {
-    color: #000000 !important;
-    font-weight: 800 !important;
-    text-shadow: none !important; /* Gölgeyi kaldır ki temiz dursun */
-}
-
-.hero-section p.lead {
-    color: #1a1a1a !important; /* Çok hafif yumuşatılmış siyah */
-    font-weight: 600 !important;
-}
-
-/* 3. Kartların arka planını da biraz açalım ki içindeki siyah yazılar okunsun */
-.card, .info-card {
-    background: rgba(255, 255, 255, 0.5) !important; /* Şeffaflığı %50 yaptık */
+    background: rgba(10, 29, 55, 0.85) !important;
     backdrop-filter: blur(10px);
 }
 
-/* 4. Navbar'ı da yazılarınla uyumlu beyaz-gri arası bir tona çekelim */
-.navbar {
-    background-color: rgba(255, 255, 255, 0.8) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+/* Butonlar */
+.btn-orange { 
+    background-color: #f39c12; 
+    color: white; 
+    border-radius: 0; 
+    font-weight: bold; 
+    transition: 0.3s;
 }
 
-/* 5. Siyah yazıların genel keskinliği */
-h1, h2, h3, h4, h5, h6, p, .nav-link {
-    color: #000000 !important;
+.btn-orange:hover { 
+    background-color: #e67e22; 
+    color: white; 
+}
+
+/* Kartlar ve Hizmetler */
+.info-card { 
+    border-bottom: 4px solid #0a1d37; 
+    transition: 0.3s; 
+    background-color: white !important;
+}
+
+.card {
+    background-color: white !important;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.card:hover, .info-card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; 
+}
+
+/* WhatsApp Butonu */
+.whatsapp-fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.whatsapp-fixed:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    color: white;
+}
+
+/* Video Arka Planını Kapat (Eğer HTML'de duruyorsa görünmesin) */
+.video-background {
+    display: none !important;
 }
