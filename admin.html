@@ -16,6 +16,7 @@
 </head>
 <body>
 
+
 <div id="login-area" class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -132,10 +133,22 @@
         }
     });
 
-    // 4. ÇIKIŞ YAPMA (Opsiyonel: Panele bir çıkış butonu eklersen kullanırsın)
-    function cikisYap() {
-        auth.signOut();
-    }
+    // ÇIKIŞ YAPMA FONKSİYONU
+const logoutBtn = document.getElementById('logoutBtn');
+
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        auth.signOut().then(() => {
+            // Çıkış başarılıysa ana sayfaya gönder
+            alert("Başarıyla çıkış yapıldı!");
+            window.location.href = "index.html"; 
+        }).catch((error) => {
+            // Hata çıkarsa konsola yazdır
+            console.error("Çıkış yaparken hata oluştu: ", error);
+            alert("Çıkış yapılamadı, hata: " + error.message);
+        });
+    });
+}
 
     // 5. İLANLARI LİSTELEME VE SİLME
     function ilanlariGetir() {
