@@ -271,29 +271,41 @@ body {
     color: white;
 
 }
-/* --- OKUNABİLİRLİK GÜNCELLEMESİ (SİYAH METİNLER) --- */
+/* --- HERO SECTION VE GENEL OKUNABİLİRLİK DÜZENLEMESİ --- */
 
-/* 1. Navbar linklerini siyah yap */
-.navbar .nav-link {
-    color: #000000 !important;
+/* 1. Hero üzerindeki o koyu kutuyu açık renkli ve buzlu yapalım */
+.hero-section .rounded {
+    background: rgba(255, 255, 255, 0.4) !important; /* Beyaz transparan arka plan */
+    backdrop-filter: blur(15px); /* Buzlu cam efekti */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 40px !important;
 }
 
-/* 2. Hero Section (Giriş) yazısını siyah yap */
-.hero-section h1, .hero-section p {
+/* 2. Hero içindeki başlık ve alt yazıyı net siyah yapalım */
+.hero-section h1 {
     color: #000000 !important;
+    font-weight: 800 !important;
+    text-shadow: none !important; /* Gölgeyi kaldır ki temiz dursun */
 }
 
-/* 3. Tüm şeffaf kartların içindeki yazıları siyah yap */
-.card, .info-card, .card-title, .card-text, .card p, .card h5 {
-    color: #000000 !important;
+.hero-section p.lead {
+    color: #1a1a1a !important; /* Çok hafif yumuşatılmış siyah */
+    font-weight: 600 !important;
 }
 
-/* 4. Genel başlıkları ve paragrafları siyah yap */
-h1, h2, h3, h4, h5, h6, p, section p, .text-muted {
-    color: #000000 !important;
-}
-
-/* 5. Kartların üzerindeki o beyaz puslu efekti biraz daha belirgin yapalım ki siyah yazı patlasın */
+/* 3. Kartların arka planını da biraz açalım ki içindeki siyah yazılar okunsun */
 .card, .info-card {
-    background: rgba(255, 255, 255, 0.3) !important; /* Beyazlığı %30'a çıkardık */
+    background: rgba(255, 255, 255, 0.5) !important; /* Şeffaflığı %50 yaptık */
+    backdrop-filter: blur(10px);
+}
+
+/* 4. Navbar'ı da yazılarınla uyumlu beyaz-gri arası bir tona çekelim */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 5. Siyah yazıların genel keskinliği */
+h1, h2, h3, h4, h5, h6, p, .nav-link {
+    color: #000000 !important;
 }
