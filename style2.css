@@ -1,139 +1,273 @@
-/* GENEL AYARLAR */
 html {
+
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+
+    scroll-padding-top: 90px; /* Navbar'ın içeriği kapatmasını engeller */
+
 }
 
-body { 
-    font-family: 'Inter', sans-serif; 
-    background-color: black; /* Video yüklenene kadar siyah ekran */
-    color: white; 
-    margin: 0;
-}
 
-/* VİDEO ARKA PLAN SİSTEMİ */
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
 
-.video-background video {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-}
+/* Kartlara hover (üzerine gelince) efekti ekleyelim, daha canlı dursun */
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Videoyu %60 karartır */
-    z-index: 1;
-}
-
-/* NAVBAR (ŞEFFAF VE BUZLU) */
-.navbar {
-    min-height: 80px;
-    background-color: rgba(10, 29, 55, 0.8) !important;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-link { 
-    font-weight: 600; 
-    color: white !important; 
-    font-size: 0.9rem; 
-}
-
-.navbar-brand img {
-    max-height: 60px;
-    width: auto;
-    display: block;
-}
-
-/* HERO SECTION (VİDEO ÜZERİNDEKİ GİRİŞ) */
-.hero-section {
-    background: transparent; /* Eski resmi sildik */
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    color: white;
-}
-
-/* TÜM BÖLÜMLERİ ŞEFFAF YAP */
-#kurumsal, #galeri, #lojistik, #iletisim, section {
-    background-color: transparent !important;
-    color: white !important;
-}
-
-/* VIP KART TASARIMI (CAM EFEKTİ) */
 .card, .info-card {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white !important;
+
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
+
+
 
 .card:hover, .info-card:hover {
+
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5) !important;
-    background: rgba(255, 255, 255, 0.15) !important;
+
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+
 }
 
-/* METİN RENKLERİ GÜNCELLEME */
-h1, h2, h3, h4, h5, h6, p, span, small, .card-title, .card-text {
-    color: white !important;
+
+
+    body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+
+    .bg-dark-blue { background-color: #0a1d37; }
+
+    .text-dark-blue { color: #0a1d37; }
+
+    .btn-orange { background-color: #f39c12; color: white; border-radius: 0; font-weight: bold; }
+
+    .btn-orange:hover { background-color: #e67e22; color: white; }
+
+    .hero-section {
+
+        background: linear-gradient(rgba(10, 29, 55, 0.7), rgba(10, 29, 55, 0.7)), url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80');
+
+        background-size: cover;
+
+        background-position: center;
+
+        height: 500px;
+
+        color: white;
+
+        display: flex;
+
+        align-items: center;
+
+    }
+
+    .info-card { border-bottom: 4px solid #0a1d37; transition: 0.3s; }
+
+    .info-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    .nav-link { font-weight: 600; color: #333 !important; font-size: 0.9rem; }
+
+    .nav-link.active { color: #0d6efd !important; border-bottom: 2px solid #0d6efd; }
+
+
+
+  /* style.css dosyasının en sonuna ekle */
+
+
+
+.navbar-brand img {
+
+    max-height: 60px; /* Logonun maksimum yüksekliği */
+
+    width: auto;      /* Genişliği otomatik ayarlasın */
+
+    display: block;   /* Bloğu kaplasın */
+
 }
 
-.text-muted {
-    color: rgba(255, 255, 255, 0.7) !important;
+
+
+/* Navigasyonun genel yüksekliğini logoya göre sabitlemek için: */
+
+.navbar {
+
+    min-height: 80px;
+
 }
 
-/* BUTONLAR VE İKONLAR */
-.btn-orange { 
-    background-color: #f39c12; 
-    color: white; 
-    border-radius: 0; 
-    font-weight: bold; 
-}
 
-.btn-orange:hover { 
-    background-color: #e67e22; 
-    color: white; 
-}
+
+/* WHATSAPP BUTON STİLLERİ */
 
 .whatsapp-fixed {
+
     position: fixed;
+
     bottom: 20px;
+
     right: 20px;
+
     background-color: #25d366;
+
     color: white;
+
     padding: 12px 20px;
+
     border-radius: 50px;
+
     display: flex;
+
     align-items: center;
+
     text-decoration: none;
+
     z-index: 9999;
+
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
     transition: 0.3s;
+
 }
 
+
+
+.whatsapp-fixed i {
+
+    font-size: 24px;
+
+    margin-right: 10px;
+
+}
+
+
+
+.whatsapp-fixed span {
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+}
+
+
+
 .whatsapp-fixed:hover {
+
     transform: scale(1.1);
-    background-color: #128c7e;
+
     color: white;
+
+    background-color: #128c7e;
+
+}
+
+
+
+/* Kartlar ve Görseller İçin Küçük Bir Parlatma Efekti */
+
+.info-card, .card {
+
+    transition: all 0.3s ease;
+
+}
+
+
+
+.info-card:hover, .card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+
+}
+
+
+
+/* Video Arka Plan Stilleri */
+
+.video-background {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    z-index: -1; /* En arkaya gönder */
+
+    overflow: hidden;
+
+}
+
+
+
+.video-background video {
+
+    min-width: 100%;
+
+    min-height: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: cover;
+
+}
+
+
+
+/* Videonun üzerine siyah transparan bir perde çekiyoruz */
+
+.overlay {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6); /* %60 karanlık yapıyoruz ki yazılar patlasın */
+
+    z-index: 1;
+
+}
+
+
+
+/* Sayfadaki diğer tüm içerikleri videonun önüne çekmek için */
+
+body {
+
+    color: white; /* Yazıları beyaz yapalım ki karanlıkta parlasın */
+
+    background-color: black; /* Video yüklenene kadar ekran siyah kalsın */
+
+}
+
+
+
+/* Kartların arkasını hafif transparan yaparsan çok daha lüks durur */
+
+.card {
+
+    background: rgba(255, 255, 255, 0.05) !important;
+
+    backdrop-filter: blur(10px); /* Cam efekti (Frosted Glass) */
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    color: white;
+
 }
