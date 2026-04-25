@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli | Kalaycıoğlu Petrol</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #f0f2f5; font-family: 'Segoe UI', sans-serif; }
+        .admin-card { border: none; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
+        #admin-area { display: none; }
+        .car-item { transition: 0.3s; }
+        .car-item:hover { background: #fff1f1; }
+    </style>
+</head>
+<body>
+<div class="video-background">
+    <div class="overlay"></div>
+    <video playsinline autoplay muted loop poster="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=1920">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-car-driving-on-the-highway-at-night-1595-large.mp4" type="video/mp4">
+    </video>
+</div> 
+
+<div id="login-area" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card admin-card p-4 text-center mt-5">
+                <i class="fas fa-user-shield fa-4x text-primary mb-3"></i>
+                <h4 class="fw-bold mb-4">Kalaycıoğlu Yönetim</h4>
+                <input type="password" id="passInput" class="form-control mb-3 text-center" placeholder="Şifreyi Giriniz">
+                <button onclick="girisYap()" class="btn btn-primary w-100 fw-bold py-2">SİSTEME GİR</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="admin-area" class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="card admin-card p-4 sticky-top" style="top: 20px;">
+                <h3 class="fw-bold text-primary mb-4"><i class="fas fa-plus-circle me-2"></i>Yeni İlan Ekle</h3>
+                <form id="car-upload-form">
+                    <div class="row g-3">
+                        <div class="col-12"><input type="text" class="form-control" id="carModel" placeholder="Araç Marka / Model" required></div>
+                        <div class="col-6"><input type="number" class="form-control" id="carPrice" placeholder="Fiyat (TL)" required></div>
+                        <div class="col-6"><input type="number" class="form-control" id="carYear" placeholder="Yıl" required></div>
+                        <div class="col-6"><input type="text" class="form-control" id="carKM" placeholder="Kilometre" required></div>
+                        <div class="col-6">
+                            <select class="form-select" id="carFuel">
+                                <option value="Dizel">Dizel</option>
+                                <option value="Benzin">Benzin</option>
+                                <option value="Hibrit">Hibrit</option>
+                                <option value="Elektrik">Elektrik</option>
+                            </select>
+                        </div>
+                        <div class="col-12"><textarea class="form-control" id="carDesc" rows="2" placeholder="Araç Özellikleri..."></textarea></div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold small text-muted">Araç Fotoğrafı</label>
+                            <input type="file" id="carFile" class="form-control" accept="image/*" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" id="submitBtn" class="btn btn-success w-100 py-3 fw-bold shadow">YAYINLA</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card admin-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-bold text-danger m-0"><i class="fas fa-list me-2"></i>Aktif İlanlar</h3>
+                    <button onclick="location.reload()" class="btn btn-outline-secondary btn-sm">Çıkış</button>
+                </div>
+                <div id="active-cars-list" class="list-group list-group-flush">
+                    <p class="text-center text-muted">İlanlar yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+<script>
+    // 1. BURAYI KONSOLDAN ALDIĞINLA DEĞİŞTİR
+    const firebaseConfig = {
+      apiKey: "AIzaSyBotY5-sgPBmaGEGvgtg1YHSz-fuxDh87o",
+        authDomain: "admin-paneli-9aade.firebaseapp.com",
+        projectId: "admin-paneli-9aade",
+        storageBucket: "admin-paneli-9aade.firebasestorage.app",
+        messagingSenderId: "284293391890",
+        appId: "1:284293391890:web:21f9887392d08bb8c55acb"
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+    const auth = firebase.auth();
+
+    // 2. GİRİŞ FONKSİYONU
+    async function girisYap() {
+        const email = "admin@kalaycioglu.com";
+        const pass = document.getElementById('passInput').value;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, pass);
+        } catch (error) {
+            alert("Şifre yanlış veya yetki yok Bero! Hata: " + error.message);
+        }
+    }
+
+    // 3. OTURUM KONTROLÜ
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            document.getElementById('login-area').style.display = 'none';
+            document.getElementById('admin-area').style.display = 'block';
+            ilanlariGetir();
+        } else {
+            document.getElementById('login-area').style.display = 'block';
+            document.getElementById('admin-area').style.display = 'none';
+        }
+    });
+
+    // 4. ÇIKIŞ YAPMA (Opsiyonel: Panele bir çıkış butonu eklersen kullanırsın)
+    function cikisYap() {
+        auth.signOut();
+    }
+
+    // 5. İLANLARI LİSTELEME VE SİLME
+    function ilanlariGetir() {
+        db.collection("araclar").orderBy("createdAt", "desc").onSnapshot(snapshot => {
+            const listDiv = document.getElementById('active-cars-list');
+            listDiv.innerHTML = "";
+            
+            if(snapshot.empty) { 
+                listDiv.innerHTML = "<p class='text-center'>Henüz ilan yok.</p>"; 
+            }
+
+            snapshot.forEach(doc => {
+                const car = doc.data();
+                listDiv.innerHTML += `
+                    <div class="list-group-item car-item py-3 border-bottom">
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <img src="${car.image}" class="img-fluid rounded shadow-sm" style="height: 60px; object-fit: cover;">
+                            </div>
+                            <div class="col-6">
+                                <h6 class="mb-1 fw-bold">${car.model}</h6>
+                                <p class="mb-0 small text-muted">${Number(car.price).toLocaleString()} TL | ${car.year}</p>
+                            </div>
+                            <div class="col-3 text-end">
+                                <button onclick="ilanSil('${doc.id}')" class="btn btn-danger btn-sm rounded-pill px-3">SİL</button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        });
+    }
+
+    async function ilanSil(id) {
+        if(confirm("Bu ilanı silmek istediğine emin misin?")) {
+            try {
+                await db.collection("araclar").doc(id).delete();
+                alert("İlan başarıyla kaldırıldı.");
+            } catch (e) { 
+                alert("Silerken hata oldu: Yetkin olmayabilir."); 
+            }
+        }
+    }
+
+    // 6. YENİ İLAN EKLEME
+    const carForm = document.getElementById('car-upload-form');
+    carForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const file = document.getElementById('carFile').files[0];
+        
+        if(!file) { alert("Lütfen bir resim seç!"); return; }
+
+        btn.disabled = true;
+        btn.innerHTML = "Yükleniyor...";
+
+        try {
+            // Resim yükleme
+            const ref = storage.ref('araclar/' + Date.now() + "_" + file.name);
+            const upload = await ref.put(file);
+            const url = await upload.ref.getDownloadURL();
+
+            // Firestore'a veri ekleme
+            await db.collection("araclar").add({
+                model: document.getElementById('carModel').value,
+                price: Number(document.getElementById('carPrice').value),
+                year: document.getElementById('carYear').value,
+                km: document.getElementById('carKM').value,
+                fuel: document.getElementById('carFuel').value,
+                desc: document.getElementById('carDesc').value,
+                image: url,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+            alert("Araç galeriye eklendi!");
+            carForm.reset();
+        } catch (error) { 
+            alert("Hata: " + error.message); 
+        } finally { 
+            btn.disabled = false; 
+            btn.innerHTML = "YAYINLA"; 
+        }
+    });
+</script>
+</body>
+</html>
